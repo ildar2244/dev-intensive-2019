@@ -3,12 +3,11 @@ package ru.skillbranch.devintensive
 import org.junit.Test
 
 import org.junit.Assert.*
-import ru.skillbranch.devintensive.exstensions.TimeUnits
-import ru.skillbranch.devintensive.exstensions.add
-import ru.skillbranch.devintensive.exstensions.format
-import ru.skillbranch.devintensive.exstensions.toUserView
+import ru.skillbranch.devintensive.exstensions.*
 import ru.skillbranch.devintensive.models.*
+import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -23,21 +22,15 @@ class ExampleUnitTest {
 
     @Test
     fun test_instance() {
-        val user1 = User("1")
-        val user2 = User("2")
-        val user3 = User("3")
+        val now = Date()
+        val dateY = Date().add(-2, TimeUnits.YEAR)
+        val dateM = Date().add(-3, TimeUnits.MONTH)
+        val dateD = Date().add(-6, TimeUnits.DAY)
+        val dateH = Date().add(-3, TimeUnits.HOUR)
+        val dateMin = Date().add(-6, TimeUnits.MINUTE)
+        val dateS = Date().add(-17, TimeUnits.SECOND)
 
-        user1.printMe()
-
-        println("$user1 $user2 $user3")
-    }
-
-    @Test
-    fun test_factory() {
-//        val user1 = User.makeUser("John Cena")
-//        val user2 = User.makeUser("John Wick")
-        val user3 = User.makeUser("John Silver")
-        print(user3)
+        print(Date().humanizeDiff(dateY))
     }
 
     @Test
@@ -47,12 +40,14 @@ class ExampleUnitTest {
         val user3 = user.copy(lastVisit = Date().add(-2, TimeUnits.SECOND))
         val user4 = user.copy(lastName = "Cena", lastVisit = Date().add(2, TimeUnits.HOUR))
 
-        println("""
+        println(
+            """
             ${user.lastVisit?.format()}
             ${user2.lastVisit?.format()}
             ${user3.lastVisit?.format()}
             ${user4.lastVisit?.format()}
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
@@ -67,8 +62,10 @@ class ExampleUnitTest {
     @Test
     fun test_abstract_factory() {
         val user = User.makeUser("Анатолий Борщов")
-        val txtMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any text message", type = "text")
-        val imgMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "any image message", type = "image")
+        val txtMessage =
+            BaseMessage.makeMessage(user, Chat("0"), payload = "any text message", type = "text")
+        val imgMessage =
+            BaseMessage.makeMessage(user, Chat("0"), payload = "any image message", type = "image")
 
         //step1
 //        when(txtMessage) {
