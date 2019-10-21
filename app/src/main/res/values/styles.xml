@@ -1,11 +1,29 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Profile">Profile</style>
+
+    <style name="Profile.EditText" parent="Profile">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:enabled">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="Profile.EditText.Single" parent="Profile">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="Profile.EditText.MultiLine" parent="Profile">
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:maxLines">12</item>
+    </style>
 </resources>
