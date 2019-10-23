@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/ic_avatar"
             android:layout_marginStart="@dimen/spacing_normal_16">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 style="@style/Profile.EditText.Single"
                 android:id="@+id/et_first_name"
                 android:layout_width="match_parent"
@@ -155,7 +155,7 @@
             android:layout_toEndOf="@id/ic_avatar"
             android:layout_marginStart="@dimen/spacing_normal_16"
             android:layout_below="@id/wr_first_name">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 style="@style/Profile.EditText.Single"
                 android:id="@+id/et_last_name"
                 android:layout_width="match_parent"
@@ -181,7 +181,7 @@
             android:layout_marginStart="@dimen/spacing_normal_16"
             app:counterEnabled="false"
             app:counterMaxLength="128">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 style="@style/Profile.EditText.MultiLine"
                 android:id="@+id/et_about"
                 android:layout_width="match_parent"
@@ -200,11 +200,12 @@
             android:layout_height="@dimen/btn_round_size_40"
             android:src="@drawable/ic_folder_black_24dp"/>
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/wr_repository"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal_16"
             android:layout_weight="1">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 style="@style/Profile.EditText.Single"
                 android:id="@+id/et_repository"
                 android:layout_width="match_parent"
