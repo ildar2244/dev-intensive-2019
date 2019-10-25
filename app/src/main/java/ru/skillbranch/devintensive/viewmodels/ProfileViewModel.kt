@@ -13,12 +13,12 @@ class ProfileViewModel : ViewModel() {
     private val repository: PreferenceRepository = PreferenceRepository
     private val profileData = MutableLiveData<Profile>()
     private val appTheme = MutableLiveData<Int>()
+    private val repositoryError = MutableLiveData<Boolean>()
+    private val isRepoError = MutableLiveData<Boolean>()
 
     init {
         profileData.value = repository.getProfile()
-        Log.d("DEV-2019", "init-1: ${appTheme.value}")
         appTheme.value = repository.getAppTheme()
-        Log.d("DEV-2019", "init-2: ${appTheme.value}")
     }
 
     override fun onCleared() {
@@ -28,6 +28,10 @@ class ProfileViewModel : ViewModel() {
     fun getProfileData(): LiveData<Profile> = profileData
 
     fun getTheme(): LiveData<Int> = appTheme
+
+    fun getRepositoryError(): LiveData<Boolean> = repositoryError
+
+    fun getIsRepoError():LiveData<Boolean> = isRepoError
 
     fun saveProfileData(profile: Profile) {
         repository.saveProfile(profile)
@@ -44,5 +48,31 @@ class ProfileViewModel : ViewModel() {
         }
         Log.d("DEV-2019", "switchTheme: ${appTheme.value}")
         repository.saveAppTheme(appTheme.value!!)
+    }
+
+    fun onRepositoryChanged(repository: String) {
+        repositoryError.value = isValidateRepository(repository)
+    }
+
+
+    fun onRepoEditCompleted(isError: Boolean) {
+        isRepoError.value = isError
+    }
+
+    private fun isValidateRepository(repoText: String): Boolean {
+        val regexStr = "^(https:\\/\\/)?(www\\.)?(github\\.com\\/)(?!(${getRegexExceptions()})" +
+                "(?=\\/|\$))[a-zA-Z\\d](?:[a-zA-Z\\d]|-(?=[a-zA-Z\\d])){0,38}(\\/)?$"
+        val regex = Regex(regexStr)
+
+        return (repoText.isNotEmpty() && !regex.matches(repoText))
+    }
+
+    private fun getRegexExceptions(): String {
+        val exceptions = arrayOf(
+            "enterprise", "features", "topics", "collections", "trending", "events",
+            "marketplace", "pricing", "nonprofit", "customer-stories", "security",
+            "login", "join"
+        )
+        return exceptions.joinToString("|")
     }
 }
