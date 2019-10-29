@@ -14,6 +14,7 @@ gradle/
 gradlew
 gradle.properties
 gradlew.bat
+settings.gradle
 
 app/libs
 app/src/test/
